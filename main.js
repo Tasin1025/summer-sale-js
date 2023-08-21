@@ -3,16 +3,15 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const list = document.getElementById("list");
     const price = document.getElementById("price");
-    const discountText = document.getElementById("discount");
+    const discount = document.getElementById("discount");
     const totalPriceText = document.getElementById("total-price");
     const couponField = document.getElementById("coupon-field");
     const applyBtn = document.getElementById("apply-btn");
     const makePurchaseBtn = document.getElementById("make-purchase");
 
     let totalPrice = 0;
-    let serialNumber = 1;
-    let discountPercentage = 0;
-    let couponApplied = false;
+    let counter = 1;
+    let flag = false;
 
     productList.forEach(product => {
         product.addEventListener("click", function () {
@@ -21,12 +20,12 @@ document.addEventListener("DOMContentLoaded", function () {
             totalPrice += productPrice;
 
             const listItem = document.createElement("li");
-            listItem.innerText = serialNumber + ". " + productName;
+            listItem.innerText = counter + ". " + productName;
             list.appendChild(listItem);
 
-            price.innerText = "Total price: $" + totalPrice.toFixed(2);
+            price.innerText = "Total price: " + totalPrice + " Tk";
 
-            serialNumber++;
+            counter++;
 
            
             if (totalPrice > 200) {
@@ -38,19 +37,19 @@ document.addEventListener("DOMContentLoaded", function () {
     applyBtn.addEventListener("click", function () {
         const couponCode = couponField.value;
         if (couponCode === "SELL200") {
-            discountPercentage = 20;
-            const discountAmount = (totalPrice * discountPercentage) / 100;
+        
+            const discountAmount = (totalPrice * 20) / 100;
             const discountedTotalPrice = totalPrice - discountAmount;
 
-            discountText.innerText = "Discount: " + discountPercentage + "%";
-            totalPriceText.innerText = "Total: $" + discountedTotalPrice.toFixed(2);
-            couponApplied = true;
+            discount.innerText = "Discount: " + discountAmount + " Tk";
+            totalPriceText.innerText = "Total: " + discountedTotalPrice + " Tk";
+            flag = true;
 
-            // applyBtn.classList.add("applied");
+            
             applyBtn.disabled = true;
 
-            // Enable the button if total price is above 200 and coupon is applied
-            if (totalPrice > 200 && couponApplied) {
+            
+            if (totalPrice > 200 ) {
                 makePurchaseBtn.removeAttribute("disabled");
                 applyBtn.setAttribute("disabled");
             }
@@ -62,13 +61,13 @@ document.addEventListener("DOMContentLoaded", function () {
     makePurchaseBtn.addEventListener("click", function () {
 
         totalPrice = 0;
-        serialNumber = 1;
-        discountPercentage = 0;
-        couponApplied = false;
+        counter = 1;
+        
+        flag = false;
 
         list.innerHTML = "";
         price.innerText = "Total price:";
-        discountText.innerText = "Discount:";
+        discount.innerText = "Discount:";
         totalPriceText.innerText = "Total:";
         couponField.value = "";
 
