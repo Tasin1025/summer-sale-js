@@ -44,8 +44,6 @@ document.addEventListener("DOMContentLoaded", function () {
             discount.innerText = "Discount: " + discountAmount + " Tk";
             totalPriceText.innerText = "Total: " + discountedTotalPrice + " Tk";
             flag = true;
-
-            
             applyBtn.disabled = true;
 
             
@@ -62,7 +60,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         totalPrice = 0;
         counter = 1;
-        
         flag = false;
 
         list.innerHTML = "";
@@ -74,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
         applyBtn.disabled = false;
         makePurchaseBtn.disabled = true;
 
-        my_modal_3.showModal();
+        doneModal.showModal();
     });
 });
 
